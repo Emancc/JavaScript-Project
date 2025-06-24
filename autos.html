@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>BIBLIOTECA</title>
+</head>
+
+<body>
+    <header>
+        <h2> GESTION DE LIBROS </h2>
+        <nav>
+            <form onsubmit="agregarAuto(); return false">
+                <input type="text" id="marca" placeholder=" Titulo del libro" required>
+                <input type="text" id="modelo" placeholder=" Autor del libro" required>
+                <input type="number" id="anio" placeholder=" Año de publicacion" required>
+                <input type="text" id="genero" placeholder=" Genero del libro" required>
+                <button id="buttonForm" type="submit">Agregar Libro </button>
+            </form>
+            <section>
+                <h4>Filtrar por titulo</h4>
+                <input type="text" id="busqueda" placeholder="Buscar marca..." oninput="filtrarAutos()">
+                <h4>Filtrar por genero</h4>
+                <select id="filtroMarca" onchange="filtrarPorMarca()">
+                    <option value="todas">Todas</option>
+                </select>
+            </section>
+        </nav>
+    </header>
+    <button onclick="ordenarPorAnio()">Ordenar autos por año</button>
+    <table border="1" id="tablaAutos">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Año</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <h3>Resumen de autos</h3>
+    <div id="resumenAutos"></div>
+
+    <script src="./js/autos.js"></script>
+</body>
+
+</html>
