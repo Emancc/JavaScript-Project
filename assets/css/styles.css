@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(237, 206, 159);
+    background-color: rgb(244, 243, 243);
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -59,4 +59,38 @@ form button {
     color: #333;
     text-align: center;
 
+}
+
+table{
+    border-collapse: collapse;
+    border: transparent;
+    width: 80%;
+    margin: 0 auto;
+}
+
+table th{
+    background-color: #afcaea;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+table td{
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+}
+
+.botonOrdenar{
+    margin: 30px 0;
+    margin-left: 100px;
+    padding: 5px;
+    background-color: #101f1f;
+    border: 0.5px solid #1c366e;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #fffcfc;
+    text-align: center;
 }

@@ -13,8 +13,8 @@
         <h2> GESTION DE LIBROS </h2>
         <nav>
             <form onsubmit="agregarAuto(); return false">
-                <input type="text" id="marca" placeholder=" Titulo del libro" required>
-                <input type="text" id="modelo" placeholder=" Autor del libro" required>
+                <input type="text" id="titulo" placeholder=" Titulo del libro" required>
+                <input type="text" id="autor" placeholder=" Autor del libro" required>
                 <input type="number" id="anio" placeholder=" Año de publicacion" required>
                 <input type="text" id="genero" placeholder=" Genero del libro" required>
                 <button id="buttonForm" type="submit">Agregar Libro </button>
@@ -29,7 +29,7 @@
             </section>
         </nav>
     </header>
-    <button onclick="ordenarPorAnio()">Ordenar autos por año</button>
+    <button class="botonOrdenar" onclick="ordenarPorAnio()">Ordenar autos por año</button>
     <table border="1" id="tablaAutos">
         <thead>
             <tr>

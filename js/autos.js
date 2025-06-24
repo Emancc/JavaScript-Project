@@ -5,14 +5,15 @@ let indiceEditar = null;
 let ordenAscendente = false;
 
 const agregarAuto = () => {
-    const marca = document.getElementById('marca').value.trim()
-    const modelo = document.getElementById('modelo').value.trim()
+    const titulo = document.getElementById('titulo').value.trim()
+    const autor = document.getElementById('autor').value.trim()
     const anio = document.getElementById('anio').value
+    const genero = document.getElementById('genero').value
 
-    if (marca !== '' && modelo !== '' && anio !== '') {
+    if (titulo !== '' && autor !== '' && anio !== '' && genero !== '') {
 
         if (editando) {
-            autos[indiceEditar] = { marca, modelo, anio }
+            autos[indiceEditar] = { marca, modelo, anio, genero }
             editando = false
             indiceEditar = null
             document.querySelector('button[type="submit"]').innerText = 'Agregar Auto'
