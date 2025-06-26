@@ -20,32 +20,34 @@
                 <button id="buttonForm" type="submit">Agregar Libro </button>
             </form>
             <section>
-                <h4>Filtrar por titulo</h4>
-                <input type="text" id="busqueda" placeholder="Buscar marca..." oninput="filtrarAutos()">
-                <h4>Filtrar por genero</h4>
+                <h4>Filtrar por Titulo</h4>
+                <input type="text" id="busqueda" placeholder="Buscar titulo de Libro..." oninput="filtrarAutos()">
+                <h4>Filtrar por Género</h4>
                 <select id="filtroMarca" onchange="filtrarPorMarca()">
                     <option value="todas">Todas</option>
                 </select>
             </section>
         </nav>
     </header>
-    <button class="botonOrdenar" onclick="ordenarPorAnio()">Ordenar autos por año</button>
-    <table border="1" id="tablaAutos">
+    <table id="tablaAutos">
+        <button class="botonOrdenar" onclick="ordenarPorAnio()">Ordenar libros por año</button>
         <thead>
             <tr>
                 <th>#</th>
-                <th>Marca</th>
-                <th>Modelo</th>
+                <th>Titulo</th>
+                <th>Autor</th>
                 <th>Año</th>
+                <th>Genero</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         </tbody>
     </table>
-
-    <h3>Resumen de autos</h3>
-    <div id="resumenAutos"></div>
+    <article>
+        <h3>Resumen de Libros</h3>
+        <div id="resumenAutos"></div>
+    </article>
 
     <script src="./js/autos.js"></script>
 </body>

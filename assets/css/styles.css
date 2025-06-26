@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(244, 243, 243);
+    background-color: #cbf3f0;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -7,17 +7,17 @@ body {
 }
 
 header{
-    padding: 0 100px;
+    padding: 0 5vw;
 }
 
 h2 {
-    color: #333;
+    color: #1e5994;
     text-align: center;
-    font-size: 24px;
+    font-size: 2rem;
     font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #333;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 5px dotted #1e5994;
     padding-bottom: 10px;
 }
 
@@ -26,9 +26,12 @@ nav {
     justify-content: space-between;
     align-items: space-between;
     margin-bottom: 20px;
-    width:80%;
-    gap: 100px;
-    padding: 20px;
+    width:100%;
+    gap:23px;
+    padding:20px 0;
+    border-radius: 10px;
+    color:#edfefd;
+    background-color: #2ec4b6;
 }
 section{
     display: flex;
@@ -42,35 +45,55 @@ form {
     flex-direction: column;
     border: 0.5px solid #333;
     padding: 20px;
-    background-color: #fff;
+    background-color: #fcfcfc;
     border-radius: 10px;
     gap: 10px;
     margin: 0 auto;
     width: 50%;
 }
 
-form button {
+nav input, nav select{
     padding: 5px;
-    background-color: #c8eaaf;
-    border: 0.5px solid #333;
+    border: 0.5px solid #e0e0e0;
     border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: #1c366e;
+}
+
+form button {
+    padding: 10px;
+    background-color: #0fb5a1;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #f1f1f1;
     text-align: center;
 
 }
 
+form button:hover{
+    background-color: #2a9f87;
+}
+
 table{
-    border-collapse: collapse;
-    border: transparent;
-    width: 80%;
+    border-collapse: separate;
+    border-spacing: 0.5rem;
+    width: 90%;
     margin: 0 auto;
+    background-color: #2ec4b6;
+    border-radius: 10px;
+    font-weight: bold;
+    padding: 2em;
 }
 
 table th{
-    background-color: #afcaea;
-    font-size: 16px;
+    background-color: #ff9f1c;
+    font-size: 1.2rem;
+    font-style: italic;
+    border-radius: 10px;
     font-weight: bold;
     color: #333;
     text-align: center;
@@ -79,18 +102,57 @@ table th{
 table td{
     border-radius: 5px;
     font-size: 16px;
-    color: #333;
+    color: #f1f1f1;
+    text-align: center;
+}
+table button{
+    padding: 5px 10px;
+    border:none;
+    cursor: pointer;
+    font-weight: 100;
+    background-color: #318286;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #f1f1f1;
+    text-align: center;
+}
+    
+
+.botonOrdenar{
+    margin-left:5vw;
+    margin-top: 3rem;
+    margin-bottom: 0.5em;
+    cursor: pointer;
+    padding: 5px 10px;
+    border:none;
+    background-color: #318286;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #f1f1f1;
     text-align: center;
 }
 
-.botonOrdenar{
-    margin: 30px 0;
-    margin-left: 100px;
-    padding: 5px;
-    background-color: #101f1f;
-    border: 0.5px solid #1c366e;
-    border-radius: 5px;
-    font-size: 16px;
-    color: #fffcfc;
+.botonOrdenar:hover, table button:hover{
+    background-color: #205457;
+
+}
+
+article{
+    background-color: #2ec4b6;
+    border-radius: 10px;
+    margin:2rem 5vw;
+    padding: 5px 40px;
+}
+
+article h3{
     text-align: center;
+    color: #f1f1f1;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+article div{
+    color: #404040;
+    font-weight: bold;
+    font-size: 1rem;    
 }

@@ -13,21 +13,21 @@ const agregarAuto = () => {
     if (titulo !== '' && autor !== '' && anio !== '' && genero !== '') {
 
         if (editando) {
-            autos[indiceEditar] = { marca, modelo, anio, genero }
+            autos[indiceEditar] = { titulo, autor, anio, genero }
             editando = false
             indiceEditar = null
-            document.querySelector('button[type="submit"]').innerText = 'Agregar Auto'
+            document.querySelector('button[type="submit"]').innerText = 'Agregar Libro'
         } else {
             const yaExiste = autos.some(auto =>
-                auto.marca.toLowerCase() === marca.toLowerCase() &&
-                auto.modelo.toLowerCase() === modelo.toLowerCase()
+                auto.titulo.toLowerCase() === titulo.toLowerCase() &&
+                auto.autor.toLowerCase() === autor.toLowerCase()
             )
             if (yaExiste) {
-                alert('Este auto ya se encuentra cargado en el listado')
+                alert('Este Libro ya se encuentra cargado en el listado')
                 return
             }
             // Guardamos en nuestro array local autos que vamos creando
-            autos.push({ marca, modelo, anio })
+            autos.push({ titulo, autor, anio, genero })
         }
 
         // Guardamos dentro de la local storage los autos que vamos creando - Utilizos autos que es nuestro array local
@@ -40,13 +40,14 @@ const agregarAuto = () => {
         document.getElementById('marca').value = ''
         document.getElementById('modelo').value = ''
         document.getElementById('anio').value = ''
+        document.getElementById('genero').value = ''
     }
 }
 
 const filtrarAutos = () => {
     const texto = document.getElementById('busqueda').value.toLowerCase()
 
-    const autosFiltrados = autos.filter(auto => auto.marca.toLowerCase().includes(texto))
+    const autosFiltrados = autos.filter(auto => auto.titulo.toLowerCase().includes(texto))
 
     renderizarAutos(autosFiltrados)
 }
@@ -64,9 +65,10 @@ const renderizarAutos = (lista = autos) => {
 
         fila.innerHTML = `
             <td>${indexReal + 1}</td>
-            <td>${auto.marca}</td>
-            <td>${auto.modelo}</td>
+            <td>${auto.titulo}</td>
+            <td>${auto.autor}</td>
             <td>${auto.anio}</td>
+            <td>${auto.genero}</td>
             <td>
                 <button onclick="editarAuto(${indexReal})">Editar</button>
                 <button onclick="eliminarAuto(${indexReal})">Eliminar</button>
@@ -80,11 +82,12 @@ const renderizarAutos = (lista = autos) => {
 
 const editarAuto = (index) => {
     const auto = autos[index]
-    document.getElementById('marca').value = auto.marca
-    document.getElementById('modelo').value = auto.modelo
+    document.getElementById('titulo').value = auto.titulo
+    document.getElementById('autor').value = auto.autor
     document.getElementById('anio').value = auto.anio
+    document.getElementById('genero').value = auto.genero
     // document.getElementById('buttonForm').innerText='Editar auto'
-    document.querySelector('button[type="submit"]').innerText = 'Actualizar Auto'
+    document.querySelector('button[type="submit"]').innerText = 'Actualizar Libro'
     editando = true
     indiceEditar = index
 }
@@ -139,11 +142,11 @@ const mostrarResumen = () => {
 
 
     resumen.innerHTML = `
-    <p>Total de autos: ${total}</p>
+    <p>Total de libros: ${total}</p>
     <p>Promedio: ${promedio}</p>
-    <p>Autos posteriores a 2015: ${posterioresA2015}</p>
-    <p>Auto mas nuevo: ${autoNuevo.marca} ${autoNuevo.modelo} ${autoNuevo.anio}</p>
-    <p>Auto mas viejo: ${autoViejo.marca} ${autoViejo.modelo} ${autoViejo.anio}</p>
+    <p>Libro posteriores a 2015: ${posterioresA2015}</p>
+    <p>Libro mas nuevo: ${autoNuevo.titulo}  Autor:${autoNuevo.autor} Año:${autoNuevo.anio} Género:${autoNuevo.genero}</p>
+    <p>Libro mas viejo: ${autoViejo.titulo}  Autor:${autoViejo.autor} Año:${autoViejo.anio} Género:${autoViejo.genero}</p>
     `
 
 }
@@ -151,7 +154,7 @@ const mostrarResumen = () => {
 
 const actualizarSelectMarca = () => {
     const select = document.getElementById('filtroMarca')
-    const marcasUnicas = [...new Set(autos.map(auto => auto.marca))]
+    const marcasUnicas = [...new Set(autos.map(auto => auto.genero))]
 
     select.innerHTML = `<option value="todas">Todas</option>`
     marcasUnicas.forEach(marca => {
@@ -169,7 +172,7 @@ const filtrarPorMarca = () => {
     if (marca === 'todas') {
         renderizarAutos()
     } else {
-        const autosFiltrados = autos.filter(auto => auto.marca === marca)
+        const autosFiltrados = autos.filter(auto => auto.genero === marca)
         renderizarAutos(autosFiltrados)
     }
 }
