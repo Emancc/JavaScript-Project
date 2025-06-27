@@ -10,13 +10,21 @@ header{
     padding: 0 5vw;
 }
 
+img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+}
+
 h2 {
     color: #1e5994;
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
     margin-top: 1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     border-bottom: 5px dotted #1e5994;
     padding-bottom: 10px;
 }
@@ -79,34 +87,37 @@ form button:hover{
 }
 
 table{
-    border-collapse: separate;
-    border-spacing: 0.5rem;
+    border-collapse: collapse;
     width: 90%;
     margin: 0 auto;
-    background-color: #2ec4b6;
-    border-radius: 10px;
+    background-color: #ff9f1c;
+    border-radius: 15px;
     font-weight: bold;
     padding: 2em;
+    overflow: hidden;
 }
 
 table th{
     background-color: #ff9f1c;
     font-size: 1.2rem;
+    border-radius: 5px;
     font-style: italic;
-    border-radius: 10px;
     font-weight: bold;
     color: #333;
     text-align: center;
 }
 
 table td{
-    border-radius: 5px;
     font-size: 16px;
     color: #f1f1f1;
-    text-align: center;
+    background-color: #2ec4b6;
+    border-top: 1px solid #333;
+    padding: 0 15px;
 }
+
 table button{
     padding: 5px 10px;
+    margin: 5px;
     border:none;
     cursor: pointer;
     font-weight: 100;
@@ -155,4 +166,7 @@ article div{
     color: #404040;
     font-weight: bold;
     font-size: 1rem;    
+}
+div span{
+    color: #edfefd;
 }

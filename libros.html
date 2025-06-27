@@ -11,8 +11,9 @@
 <body>
     <header>
         <h2> GESTION DE LIBROS </h2>
+        <img src="assets/img/librarie.jpg" alt="libros">
         <nav>
-            <form onsubmit="agregarAuto(); return false">
+            <form onsubmit="agregarLibro(); return false">
                 <input type="text" id="titulo" placeholder=" Titulo del libro" required>
                 <input type="text" id="autor" placeholder=" Autor del libro" required>
                 <input type="number" id="anio" placeholder=" Año de publicacion" required>
@@ -21,19 +22,19 @@
             </form>
             <section>
                 <h4>Filtrar por Titulo</h4>
-                <input type="text" id="busqueda" placeholder="Buscar titulo de Libro..." oninput="filtrarAutos()">
+                <input type="text" id="busqueda" placeholder="Buscar titulo de Libro..." oninput="filtrarLibros()">
                 <h4>Filtrar por Género</h4>
-                <select id="filtroMarca" onchange="filtrarPorMarca()">
+                <select id="filtroGenero" onchange="filtrarPorGenero()">
                     <option value="todas">Todas</option>
                 </select>
             </section>
         </nav>
     </header>
-    <table id="tablaAutos">
+    <table id="tablaLibros">
         <button class="botonOrdenar" onclick="ordenarPorAnio()">Ordenar libros por año</button>
         <thead>
             <tr>
-                <th>#</th>
+                <th>n°</th>
                 <th>Titulo</th>
                 <th>Autor</th>
                 <th>Año</th>
@@ -46,10 +47,10 @@
     </table>
     <article>
         <h3>Resumen de Libros</h3>
-        <div id="resumenAutos"></div>
+        <div id="resumenLibros"></div>
     </article>
 
-    <script src="./js/autos.js"></script>
+    <script src="./js/libros.js"></script>
 </body>
 
 </html>
