@@ -25,7 +25,11 @@
                 <input type="text" id="busqueda" placeholder="Buscar titulo de Libro..." oninput="filtrarLibros()">
                 <h4>Filtrar por Género</h4>
                 <select id="filtroGenero" onchange="filtrarPorGenero()">
-                    <option value="todas">Todas</option>
+                    <option value="todos">Todos</option>
+                </select>
+                <h4>Filtrar por Leído</h4>
+                <select id="filtroLeido" onchange="filtrarPorLeido()">
+                    <option value="todos">Todos</option>
                 </select>
             </section>
         </nav>

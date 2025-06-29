@@ -4,6 +4,7 @@ let editando = false;
 let indiceEditar = null;
 let ordenAscendente = false;
 
+// Funcion para agregar libros
 const agregarLibro = () => {
     const titulo = document.getElementById('titulo').value.trim()
     const autor = document.getElementById('autor').value.trim()
@@ -13,7 +14,7 @@ const agregarLibro = () => {
     if (titulo !== '' && autor !== '' && anio !== '' && genero !== '') {
 
         if (editando) {
-            libros[indiceEditar] = { titulo, autor, anio, genero }
+            libros[indiceEditar] = { titulo, autor, anio, genero, leido: libros[indiceEditar].leido }
             editando = false
             indiceEditar = null
             document.querySelector('button[type="submit"]').innerText = 'Agregar Libro'
@@ -22,12 +23,23 @@ const agregarLibro = () => {
                 libro.titulo.toLowerCase() === titulo.toLowerCase() &&
                 libro.autor.toLowerCase() === autor.toLowerCase()
             )
+            // Validar que el año esté entre 1900 y 2025
+            const validarAnio = (anio) => {
+                const anioActual = 2025
+                return anio >= 1900 && anio <= anioActual
+                }
+
             if (yaExiste) {
                 alert('Este Libro ya se encuentra cargado en el listado')
                 return
+            }else{
+                if (!validarAnio(anio)) {
+                    alert('El año debe estar entre 1900 y 2025')
+                    return
+                }
             }
-            // Guardamos en nuestro array local autos que vamos creando
-            libros.push({ titulo, autor, anio, genero })
+            // Guardado de Libro en el local storage
+            libros.push({ titulo, autor, anio, genero, leido: false })
         }
 
         // Guardamos dentro de la local storage los autos que vamos creando - Utilizos autos que es nuestro array local
@@ -44,6 +56,7 @@ const agregarLibro = () => {
     }
 }
 
+// Funcion para filtrar libros por titulo
 const filtrarLibros = () => {
     const texto = document.getElementById('busqueda').value.toLowerCase()
 
@@ -52,6 +65,7 @@ const filtrarLibros = () => {
     renderizarLibros(librosFiltrados)
 }
 
+// Funcion para renderizar libros
 const renderizarLibros = (lista = libros) => {
 
     const tabla = document.getElementById('tablaLibros').querySelector('tbody')
@@ -69,34 +83,36 @@ const renderizarLibros = (lista = libros) => {
             <td>${libro.autor}</td>
             <td>${libro.anio}</td>
             <td>${libro.genero}</td>
-            <td>
+            <td style="display:flex;justify-content:center;gap:10px;align-items:center">
                 <button onclick="editarLibro(${indexReal})">Editar</button>
                 <button onclick="eliminarLibro(${indexReal})">Eliminar</button>
+                <input type="checkbox" onclick="marcarLibro(${indexReal})" ${libro.leido ? 'checked' : ''}>¿Leído?</label>
             </td>
             `
 
         tabla.appendChild(fila)
+        mostrarResumen()
 
     })
 }
 
+// Funcion para editar libros
 const editarLibro = (index) => {
     const libro = libros[index]
     document.getElementById('titulo').value = libro.titulo
     document.getElementById('autor').value = libro.autor
     document.getElementById('anio').value = libro.anio
     document.getElementById('genero').value = libro.genero
-    // document.getElementById('buttonForm').innerText='Editar auto'
     document.querySelector('button[type="submit"]').innerText = 'Actualizar Libro'
     editando = true
     indiceEditar = index
 }
 
 
-
+// Funcion para eliminar libros
 const eliminarLibro = (index) => {
 
-    // Eliminar el auto del array
+    // Eliminar el libro del array
     libros.splice(index, 1)
 
     // Actualizar local storage
@@ -105,6 +121,14 @@ const eliminarLibro = (index) => {
 
 }
 
+// Funcion para marcar libros como leidos
+const marcarLibro = (index) => {
+    libros[index].leido = !libros[index].leido
+    localStorage.setItem('libros', JSON.stringify(libros))
+    renderizarLibros()
+}
+
+// Ordenar libros por año de manera ascendente o descendente
 const ordenarPorAnio = () => {
     const autosOrdenados = [...libros].sort((a, b) => {
         return ordenAscendente ? a.anio - b.anio : b.anio - a.anio
@@ -114,6 +138,7 @@ const ordenarPorAnio = () => {
     renderizarLibros(autosOrdenados)
 }
 
+// Mostrar resumen de libros
 const mostrarResumen = () => {
     const resumen = document.getElementById('resumenLibros')
 
@@ -122,40 +147,58 @@ const mostrarResumen = () => {
         return;
     }
 
-    // Total de autos
+
+    // Total de libros
     const total = libros.length
 
+    // Total de libros leidos
+    const totalLeidos = libros.filter(libro => libro.leido).length
+    
+    // Total de libros no leidos
+    const totalNoLeidos = libros.filter(libro => !libro.leido).length
+    
     // promedio de años
     const sumaAnios = libros.reduce((acum, libro) => acum + parseInt(libro.anio), 0)
-
+    
+    // redondeo del promedio
     const promedio = Math.round(sumaAnios / total)
 
-    // filtro autos posteriores a 2015
-    const posterioresA2015 = libros.filter(libro => libro.anio > 2015).length
-
-    //  Filtrar auto mas nuevo
-    const libroNuevo = libros.reduce((nuevo, libro) => (libro.anio > nuevo.anio ? libro : nuevo), libros[0])
-
-    // Filtrar auto mas antiguo
+    // filtro de libros posteriores a 2010
+    const posterioresA2010 = libros.filter(libro => libro.anio > 2010).length
+    
+    // Filtrar libro mas antiguo
     const libroViejo = libros.reduce((nuevo, libro) => (libro.anio < nuevo.anio ? libro : nuevo), libros[0])
+    
+    //  Filtrar libro mas nuevo
+    const libroNuevo = libros.reduce((nuevo, libro) => (libro.anio > nuevo.anio ? libro : nuevo), libros[0])
 
 
     resumen.innerHTML = `
-    <p>Total de libros: ${total}</p>
-    <p>Promedio: ${promedio}</p>
-    <p>Libro posteriores a 2015: ${posterioresA2015}</p>
-    <p>Libro mas nuevo: <span>${libroNuevo.titulo}</span> <br> Autor:<span>${libroNuevo.autor}</span> <br> Año:<span>${libroNuevo.anio}</span> <br> Género:<span>${libroNuevo.genero}</span> <br> </p>
-    <p>Libro mas viejo: <span>${libroViejo.titulo}</span> <br> Autor:<span>${libroViejo.autor}</span> <br> Año:<span>${libroViejo.anio}</span> <br> Género:<span>${libroViejo.genero}</span> <br> </p>
+    <p>Total de libros: <span>${total}</span> <br> 
+    Promedio: <span>${promedio}</span> <br> 
+    Libro posteriores a 2010: <span>${posterioresA2010}</span> <br> 
+    Total de libros leídos: <span>${totalLeidos}</span> <br> 
+    Total de libros no leídos: <span>${totalNoLeidos}</span></p>
+    <p>Libro mas antiguo<br>
+    Titulo:<span>${libroViejo.titulo}</span> <br> 
+    Autor:<span>${libroViejo.autor}</span> <br> 
+    Año:<span>${libroViejo.anio}</span> <br> 
+    Género:<span>${libroViejo.genero}</span></p>
+    <p>Libro mas reciente<br>
+    Titulo: <span>${libroNuevo.titulo}</span> <br> 
+    Autor:<span>${libroNuevo.autor}</span> <br> 
+    Año:<span>${libroNuevo.anio}</span> <br> 
+    Género:<span>${libroNuevo.genero}</span></p>
     `
 
 }
 
-
+// Actualizar select de generos
 const actualizarSelectGenero = () => {
     const select = document.getElementById('filtroGenero')
     const generosUnicos = [...new Set(libros.map(libro => libro.genero))]
 
-    select.innerHTML = `<option value="todas">Todas</option>`
+    select.innerHTML = `<option value="todos">Todos</option>`
     generosUnicos.forEach(genero => {
         const option = document.createElement("option")
         option.value = genero
@@ -165,13 +208,36 @@ const actualizarSelectGenero = () => {
 
 }
 
+// Filtrar libros por genero
 const filtrarPorGenero = () => {
     const genero = document.getElementById('filtroGenero').value
 
-    if (genero === 'todas') {
+    if (genero === 'todos') {
         renderizarLibros()
     } else {
         const librosFiltrados = libros.filter(libro => libro.genero === genero)
+        renderizarLibros(librosFiltrados)
+    }
+}
+
+// Actualizar select de estados de lectura
+const actualizarSelectLeido = () => {
+    const select = document.getElementById('filtroLeido')
+    select.innerHTML = `
+        <option value="todas">Todos</option>
+        <option value="leidos">Leídos</option>
+        <option value="no-leidos">No leídos</option>
+    `
+}
+
+// Filtrar libros por estado de lectura
+const filtrarPorLeido = () => {
+    const estado = document.getElementById('filtroLeido').value
+
+    if (estado === 'todas') {
+        renderizarLibros()
+    } else {
+        const librosFiltrados = libros.filter(libro => libro.leido === (estado === 'leidos'))
         renderizarLibros(librosFiltrados)
     }
 }
@@ -181,4 +247,5 @@ document.addEventListener('DOMContentLoaded', () => {
     renderizarLibros()
     mostrarResumen()
     actualizarSelectGenero()
+    actualizarSelectLeido()
 })

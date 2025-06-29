@@ -32,7 +32,7 @@ h2 {
 nav {
     display: flex;
     justify-content: space-between;
-    align-items: space-between;
+    align-items: center;
     margin-bottom: 20px;
     width:100%;
     gap:23px;
@@ -44,15 +44,14 @@ nav {
 section{
     display: flex;
     flex-direction: column;
-    padding: 40px;
+    padding: 0 40px;
     width: 30%;
-    margin: 0 auto; 
 }
 form {
     display: flex;
     flex-direction: column;
-    border: 0.5px solid #333;
-    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.265);
+    padding: 30px;
     background-color: #fcfcfc;
     border-radius: 10px;
     gap: 10px;
@@ -127,6 +126,12 @@ table button{
     color: #f1f1f1;
     text-align: center;
 }
+
+td input[type="checkbox"]{
+    width: 20px;
+    height: 20px;
+}
+
     
 
 .botonOrdenar{
@@ -159,13 +164,21 @@ article h3{
     text-align: center;
     color: #f1f1f1;
     font-weight: bold;
+    text-decoration:underline;
     font-size: 2rem;
 }
 
+article p{
+    padding: 30px;
+    line-height: 1.5;
+}
 article div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     color: #404040;
     font-weight: bold;
-    font-size: 1rem;    
+    font-size: 1.2rem;    
 }
 div span{
     color: #edfefd;
